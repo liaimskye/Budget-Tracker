@@ -45,4 +45,11 @@ while True:
 
 selection = menu()
 
-while True
+while True:
+    if selection == '1':
+        cursor_ob.execute('''
+        SELECT *
+        FROM account
+        WHERE id = 
+        ''')
+        
