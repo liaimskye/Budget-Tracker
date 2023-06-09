@@ -36,6 +36,9 @@ while True:
         pass_check = input("Enter password: ")
         if pass_check == password[index]:
             print("Logged in")
+            user_id = id[index]
+            print(user_id)
+            print(type(user_id))
             break
 
         else:
@@ -47,9 +50,12 @@ selection = menu()
 
 while True:
     if selection == '1':
-        cursor_ob.execute('''
-        SELECT *
-        FROM account
-        WHERE id = 
-        ''')
+        cursor_ob.execute("SELECT * FROM account WHERE id =?",(user_id,))
+        for row in cursor_ob:
+            print(row)
         
+    elif selection == '2':
+        new_expense = int(input("Enter total expense: "))
+        current_total = cursor_ob.execute("SELECT expenses FROM account WHERE id=?",(user_id,))
+        new_total = current_total + new_expense
+        cursor_ob.execute("UPDATE account SET expenses=? WHERE id=?",(new_total,user_id))
