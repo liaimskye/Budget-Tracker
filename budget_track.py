@@ -20,6 +20,8 @@ try:
 except Error as e:
     pass
 
+
+# in option selecton tree, create an add user option that calls the user class and store user function
 ids = 5
 username = "liaim"
 password = "chidori15"
