@@ -46,3 +46,18 @@ def existing_books():
         existing_password.append(row[2])
     
     return existing_id,existing_username,existing_password
+
+
+
+class User:
+    def __init__(self, ids, username, password):
+        self.ids = ids
+        self.username = username
+        self.password = password
+    
+    def store_info(self):
+        cursor_ob.execute('''
+        INSERT INTO users(id,name,password)
+        VALUES (?,?,?)
+        ''',(self.ids,self.username,self.password))
+        db.commit()
