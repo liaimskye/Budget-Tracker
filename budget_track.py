@@ -22,6 +22,7 @@ except Error as e:
 
 
 # in option selecton tree, create an add user option that calls the user class and store user function
+# create checks to ensure username/ids dont already exist to avoid duplicates
 ids = 5
 username = "liaim"
 password = "chidori15"
