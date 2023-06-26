@@ -2,6 +2,7 @@ import sqlite3
 from sqlite3 import Error
 from modules import menu
 from modules import *
+from random import randint
 
 db = sqlite3.connect('data/budget_data')
 cursor_ob = db.cursor()
@@ -23,12 +24,25 @@ except Error as e:
 
 # in option selecton tree, create an add user option that calls the user class and store user function
 # create checks to ensure username/ids dont already exist to avoid duplicates
-ids = 5
-username = "liaim"
-password = "chidori15"
 
-user = User(ids,username,password)
-user.store_info()
+# user creation loop
+# get existing user credentials for checking of duplicates
+existing_id,existing_username,existing_password = existing_books()
+
+while True:
+    ids = randint(10000,99999)
+    if ids not in existing_id:
+        username = input("Enter username: ")
+        if username not in existing_username:
+            password = input("Enter password: ")
+            user = User(ids,username,password)
+            user.store_info()
+            break
+        else:
+            print("Username already in use")
+            break
+
+
 
 cursor_ob.execute('''
 SELECT *
