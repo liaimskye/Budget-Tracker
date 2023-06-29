@@ -1,7 +1,55 @@
 import sqlite3
+from random import randint
 
 db = sqlite3.connect('data/budget_data')
 cursor_ob = db.cursor()
+
+
+def main_menu(existing_id,existing_username,existing_password):
+    selection = input('''
+    1. Create user
+    2. login
+    3. Exit
+    ''')
+    if selection == '1':
+        
+        ids = randint(10000,99999)
+        if ids not in existing_id:
+            username = input("Enter username: ")
+            if username not in existing_username:
+                password = input("Enter password: ")
+                user = User(ids,username,password)
+                user.store_info()
+                print("User created")
+                main_menu(existing_id,existing_username,existing_password)
+            else:
+                print("Username already in use")
+                main_menu(existing_id,existing_username,existing_password)
+
+    if selection == '2':
+        id,username,password = existing_books()
+        index = None
+        while True:
+            login = input("enter your username: ")
+            for i in range(len(username)):
+                if login == username[i]:
+                    index = i
+            if index == None:
+                print("invalid username")
+                continue
+            else:
+                pass_check = input("Enter password: ")
+                if pass_check == password[index]:
+                    print("Logged in")
+                    user_id = id[index]
+                    print(user_id)
+                    print(type(user_id))
+                    break
+
+                else:
+                    print("incorrect password")
+                    continue
+
 
 def menu():
     '''
@@ -11,13 +59,13 @@ def menu():
     - Returns the selection made 
     '''
 
-    selection = input(('''
+    selection = input('''
 Select an option below:
 1. display info
 2. enter expenses
 3. update info
 0. Exit
-: '''))
+: ''')
     return selection
 
 

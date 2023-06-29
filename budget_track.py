@@ -29,26 +29,14 @@ except Error as e:
 # get existing user credentials for checking of duplicates
 existing_id,existing_username,existing_password = existing_books()
 
-while True:
-    ids = randint(10000,99999)
-    if ids not in existing_id:
-        username = input("Enter username: ")
-        if username not in existing_username:
-            password = input("Enter password: ")
-            user = User(ids,username,password)
-            user.store_info()
-            break
-        else:
-            print("Username already in use")
-            break
+main_menu(existing_id,existing_username,existing_password)
 
-
-
-cursor_ob.execute('''
+# view user table
+""" cursor_ob.execute('''
 SELECT *
 FROM users
 ''')
-print(cursor_ob.fetchall())
+print(cursor_ob.fetchall()) """
 
 
 """ id,username,password = existing_books()
